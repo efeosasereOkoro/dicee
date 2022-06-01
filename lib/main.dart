@@ -7,8 +7,8 @@ void main() {
     MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.teal,
-        appBar:
-            AppBar(title: const Text('Dice Game'), backgroundColor: Colors.pink),
+        appBar: AppBar(
+            title: const Text('Dice Game'), backgroundColor: Colors.pink),
         body: const DicePage(),
       ),
     ),
@@ -29,16 +29,20 @@ class _DicePageState extends State<DicePage> {
 
   @override
   Widget build(BuildContext context) {
+    rollDice() {
+      setState(() {
+        leftDiceNumber = Random().nextInt(6) + 1;
+        rightDiceNumber = Random().nextInt(6) + 1;
+      });
+    }
+
     return Center(
       child: Row(
         children: [
           Expanded(
             child: TextButton(
               onPressed: () {
-                setState(() {
-                  leftDiceNumber = Random().nextInt(6) + 1;
-                  rightDiceNumber = Random().nextInt(6) + 1;
-                });
+                rollDice();
               },
               child: (Image.asset('images/dice$leftDiceNumber.png')),
             ),
@@ -46,10 +50,7 @@ class _DicePageState extends State<DicePage> {
           Expanded(
             child: TextButton(
               onPressed: () {
-                setState(() {
-                  rightDiceNumber = Random().nextInt(6) + 1;
-                  leftDiceNumber = Random().nextInt(6)  + 1;
-                });
+                rollDice();
               },
               child: (Image.asset('images/dice$rightDiceNumber.png')),
             ),
